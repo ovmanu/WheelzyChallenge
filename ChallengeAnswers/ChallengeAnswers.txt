@@ -1,20 +1,54 @@
-1) - EF query in solution repository (WheelzyChallenge.Infrastructure.Repositories.CarRepository.cs)
-   - SQL query in file "SQLQuery.sql"
+1) - I created a Clean Architecture Solution with 4 projects:
+			* WheelzyChallenge.Domain (with Entities and Interfaces)
+			* WheelzyChallenge.Infrastructure (wioth DbContext, Persistance, Repositories with EF, Migrations)
+			* WheelzyChallenge.Application (with DTOs, Commands, Queries, Handlers)
+			* WheelzyChallenge.API (Controllers)
+
+   - This solution contemplates two use cases for the cars problem:
+			* GetCarsById (with all the data from the quote, buyer and status)	
+			* GetCarsWithQuoteAndStatus (all the cars data, their quotes, buyers and statuses)
+		
+   - The queries are being made with Entity Framework as asked.
+   
+   - You can find the required query to show the car information, current buyer name with its quote and current status name with its status date here:
+			* The EF query in solution repository (WheelzyChallenge.Infrastructure.Repositories.CarRepository.cs)
+			* The SQL query in file "ChallengeAnswers\SQLQuery.sql"
 
 
-2) I would cache the data instead of going to the database and query the data every time I need it. This reduces load on the database, improves performance, and lowers response times.
-If there is only one instance of the application I would use MemoryCache, but if there are many instances I could use a distributed cache (like Redis or SQL Server Distributed Cache) so that all instances share the same cached data.
+
+2) I would cache the data instead of going to the database and query the data every time I need it. 
+   This reduces load on the database, improves performance, and lowers response times.
+	
+   If there is only one instance of the application I would use MemoryCache, 
+   but if there are many instances I could use a distributed cache (like Redis or SQL Server Distributed Cache) 
+   so that all instances share the same cached data.
 
 
-3) - New Method in "UpdateCustomersBalanceByInvoices.cs"
-   - The old method runs a new query for every invoice and saves in every iteration, which is inefficient. It lacks null checks and it doesn't use transactions so some items may be updated and others not.
-   - I changed the method so it first get the required customers Ids and then bring them in only one query. Then it updates all the balances in memory to avoid multiple queries. Finally, it saves all changes in only one transaction.
+
+3) - You can see the new refactorized method in "ChallengeAnswers\UpdateCustomersBalanceByInvoices.cs"
+   
+   - The old method:
+		* runs a new query for every invoice, which is inefficient
+		* saves in every iteration, also slow and inefficient
+	    * lacks null checks
+		* doesn't use transactions so some items may be updated and others not.
+   
+   - I changed the method so it:
+		* first gets the required customers Ids 
+		* then brings them in only one query
+		* then updates all the balances in memory to avoid multiple queries
+		* Finally, saves all changes in only one transaction.
 
 
-4) - I implemented the GetOrders() Method in the OrderRepository class
-   - I also added the Order and Customer entity so it can be tested from the OrdersController I created.
+
+4) - I implemented the GetOrders() Method in the OrderRepository class (WheelzyChallenge.Infrastructure.Repositories)
+
+   - I also added the Order and Customer entity (WheelzyChallenge.Domain) so it can be tested from the OrdersController I created (WheelzyChallenge.API).
+
    - The query is efficient and filters the data with the parameters only when provided.
 
 
+
 5) - You can see the solution in the "WheelzyChallenge.Tools" project, "CodeFixer.cs" file.
-   - You can find the tests in "WheelzyChallenge.Tools.Tests" project.
+
+   - You can find the tests running OK in "WheelzyChallenge.Tools.Tests" project.
