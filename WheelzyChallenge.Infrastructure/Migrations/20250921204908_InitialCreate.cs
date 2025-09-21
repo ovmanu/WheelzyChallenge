@@ -120,7 +120,7 @@ namespace WheelzyChallenge.Infrastructure.Migrations
                     CarId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
                     ChangedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StatusDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StatusDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsCurrent = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

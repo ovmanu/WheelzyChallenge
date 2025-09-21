@@ -12,7 +12,7 @@ using WheelzyChallenge.Infrastructure.Persistence;
 namespace WheelzyChallenge.Infrastructure.Migrations
 {
     [DbContext(typeof(WheelzyDbContext))]
-    [Migration("20250920231417_InitialCreate")]
+    [Migration("20250921204908_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -180,7 +180,7 @@ namespace WheelzyChallenge.Infrastructure.Migrations
                     b.Property<bool>("IsCurrent")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("StatusDate")
+                    b.Property<DateTime?>("StatusDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("StatusId")

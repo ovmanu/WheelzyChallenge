@@ -73,10 +73,10 @@ namespace WheelzyChallenge.Infrastructure.Persistence
                 var cars = context.Cars.ToList();
                 var statuses = context.Statuses.ToList();
 
-                var csh1 = CarStatusHistory.Create(cars[0].Id, statuses[0].Id, "system", DateTime.UtcNow.AddDays(-5), false);
+                var csh1 = CarStatusHistory.Create(cars[0].Id, statuses[0].Id, "system", null, false);
                 var csh2 = CarStatusHistory.Create(cars[0].Id, statuses[1].Id, "system", DateTime.UtcNow.AddDays(-2), true);
 
-                var csh3 = CarStatusHistory.Create(cars[1].Id, statuses[0].Id, "system", DateTime.UtcNow.AddDays(-3), true);
+                var csh3 = CarStatusHistory.Create(cars[1].Id, statuses[0].Id, "system", null, true);
 
                 var csh4 = CarStatusHistory.Create(cars[2].Id, statuses[0].Id, "system", DateTime.UtcNow.AddDays(-7), false);
                 var csh5 = CarStatusHistory.Create(cars[2].Id, statuses[2].Id, "system", DateTime.UtcNow.AddDays(-1), true);
@@ -100,9 +100,13 @@ namespace WheelzyChallenge.Infrastructure.Persistence
 
             if (!context.Orders.Any())
             {
-                var order1 = Order.Create(1, 1, true, DateTime.UtcNow.AddDays(-10), 1);
-                var order2 = Order.Create(2, 1, true, DateTime.UtcNow.AddDays(-5), 2);
-                var order3 = Order.Create(1, 2, false, DateTime.UtcNow.AddDays(-2), 3);
+
+                var customer1 = context.Customers.First();
+                var customer2 = context.Customers.Skip(1).First();
+
+                var order1 = Order.Create(customer1.Id, 1, true, DateTime.UtcNow.AddDays(-10), 1);
+                var order2 = Order.Create(customer2.Id, 1, true, DateTime.UtcNow.AddDays(-5), 2);
+                var order3 = Order.Create(customer1.Id, 2, false, DateTime.UtcNow.AddDays(-2), 3);
 
                 context.Orders.AddRange(order1, order2, order3);
                 context.SaveChanges();

@@ -177,7 +177,7 @@ namespace WheelzyChallenge.Infrastructure.Migrations
                     b.Property<bool>("IsCurrent")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("StatusDate")
+                    b.Property<DateTime?>("StatusDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("StatusId")

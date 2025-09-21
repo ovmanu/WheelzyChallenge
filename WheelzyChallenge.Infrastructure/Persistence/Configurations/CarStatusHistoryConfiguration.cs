@@ -15,7 +15,7 @@ namespace WheelzyChallenge.Infrastructure.Persistence.Configurations
                 .HasMaxLength(100);
 
             builder.Property(csh => csh.StatusDate)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(csh => csh.IsCurrent)
                 .IsRequired();
