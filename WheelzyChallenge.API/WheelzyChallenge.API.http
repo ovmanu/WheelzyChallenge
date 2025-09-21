@@ -1,0 +1,4 @@
+@WheelzyChallenge_API_HostAddress = http://localhost:5150
+
+GET {{WheelzyChallenge_API_HostAddress}}/api/car?zipCode=12345&buyerId=1
+Accept: application/json
