@@ -2,7 +2,7 @@
 			* WheelzyChallenge.Domain (with Entities and Interfaces)
 			* WheelzyChallenge.Infrastructure (wioth DbContext, Persistance, Repositories with EF, Migrations)
 			* WheelzyChallenge.Application (with DTOs, Commands, Queries, Handlers)
-			* WheelzyChallenge.API (Controllers)
+			* WheelzyChallenge.API (Controllers -with Swagger so the API can be easily tested-)
 
    - This solution contemplates two use cases for the cars problem:
 			* GetCarsById (with all the data from the quote, buyer and status)	
